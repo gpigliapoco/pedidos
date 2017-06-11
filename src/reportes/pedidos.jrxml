@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b7da968a-eb77-4ed9-af58-f7f4138c75c3">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
+	<queryString>
+		<![CDATA[SELECT
+     pedidos.`idPedidos` AS pedidos_idPedidos,
+     pedidos.`entrega` AS pedidos_entrega,
+     pedidos.`estado` AS pedidos_estado,
+     pedidos.`fecha` AS pedidos_fecha,
+     pedidos.`observacion` AS pedidos_observacion,
+     pedidos.`fk_idOperadores` AS pedidos_fk_idOperadores,
+     operadores.`razonSocial` AS operadores_razonSocial,
+     operadores.`localidad` AS operadores_localidad,
+     operadores.`provincia` AS operadores_provincia,
+     zonas.`zona` AS zonas_zona
+FROM
+     `operadores` operadores INNER JOIN `pedidos` pedidos ON operadores.`idOperadores` = pedidos.`fk_idOperadores`
+     INNER JOIN `zonas` zonas ON operadores.`idOperadores` = zonas.`fk_idOperadores`
+WHERE
+     pedidos.`estado` = "PENDIENTE"]]>
+	</queryString>
+	<field name="pedidos_idPedidos" class="java.lang.Long"/>
+	<field name="pedidos_entrega" class="java.sql.Date"/>
+	<field name="pedidos_estado" class="java.lang.String"/>
+	<field name="pedidos_fecha" class="java.sql.Date"/>
+	<field name="pedidos_observacion" class="java.lang.String"/>
+	<field name="pedidos_fk_idOperadores" class="java.lang.Long"/>
+	<field name="operadores_razonSocial" class="java.lang.String"/>
+	<field name="operadores_localidad" class="java.lang.String"/>
+	<field name="operadores_provincia" class="java.lang.String"/>
+	<field name="zonas_zona" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b1fff08a-be5e-405a-b584-4fc55cf8d535" x="0" y="0" width="555" height="38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEDIDOS PENDIENTES DE ENTREGA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="802e7cfd-bc7f-4243-b26e-903876f67373" x="0" y="1" width="36" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e38d73f-e055-4129-beb9-7f2106f52abe" x="47" y="1" width="138" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OPERADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9e118be-6b97-425c-9af4-b99372711d22" x="185" y="1" width="117" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eff24c16-7ab5-46c4-bda6-a04998ff2dec" x="302" y="1" width="52" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTREGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8dec60f-3b1a-4c0f-89ea-93b68e844ff4" x="354" y="1" width="161" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEDIDO]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1e8a58e4-496e-4915-ae77-59e296bfbba3" x="0" y="20" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM">
+				<reportElement uuid="62b48885-6dc8-4660-80d0-f42a4093487c" x="0" y="0" width="36" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e702d209-078f-474d-ac53-4caef70de1ce" x="47" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{operadores_razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f61ea5f-b82b-44e6-ae07-894b4e7f7dfe" x="168" y="0" width="62" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{operadores_localidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM">
+				<reportElement uuid="ace539a9-7f6e-4064-96bd-4b661b64bd50" x="302" y="0" width="52" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_entrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4456a87f-9d4a-4ead-936a-5333d7cbc6a1" x="354" y="0" width="161" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_observacion}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="e5012fbc-d070-458e-9aff-543086a8f61e" x="533" y="0" width="22" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="1e8a58e4-496e-4915-ae77-59e296bfbba3" x="0" y="19" width="555" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d6aab211-66ac-41e5-9077-bbc272145608" x="230" y="0" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{zonas_zona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="294">
+			<line>
+				<reportElement uuid="338231ae-1187-4b43-9d6d-9e521f037254" x="0" y="31" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4796b5d3-f969-4862-8882-33882ef64f64" x="85" y="18" width="1" height="266"/>
+			</line>
+			<line>
+				<reportElement uuid="4796b5d3-f969-4862-8882-33882ef64f64" x="262" y="18" width="1" height="266"/>
+			</line>
+			<line>
+				<reportElement uuid="4796b5d3-f969-4862-8882-33882ef64f64" x="439" y="18" width="1" height="266"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="101" splitType="Stretch"/>
+	</summary>
+</jasperReport>
